@@ -29,7 +29,7 @@ func writeScript() {
 		log.Fatal("ERROR: cannot find file attribute in config")
 		os.Exit(1)
 	}
-	script := fmt.Sprintf("cd %s\ngit pull origin master\ngo run %s & disown", path, file)
+	script := fmt.Sprintf("cd %s\ngit pull origin master\ngo build %s.go\n./%s", path, file, file)
 	ioutil.WriteFile("getter.sh", []byte(script), 0665)
 	command := exec.Command("chmod", "+x", "./getter.sh")
 	command.Run()
